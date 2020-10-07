@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title><SITE_TITLE></title>
+<!-- Link for ATOM feed autodiscovery -->
+<ATOM_AUTODETECT_LINK>
+<!-- Link for RSS feed autodiscovery -->
+<RSS_AUTODETECT_LINK>
+<!-- META -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="content-type" name="keywords" content="PhotoBlog,<SITE_TITLE>,<IMAGE_TITLE>,Pixelpost" />
+<meta http-equiv="content-type" name="description" content="<SITE_TITLE>-PhotoBlog: <IMAGE_TITLE>, <IMAGE_NOTES_CLEAN>" />
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="templates/oia/styles/dark.css" title="dark" />
+<link rel="alternate stylesheet" type="text/css" href="templates/oia/styles/light.css" title="light" />
+<!-- SCRIPTS -->
+<script type="text/javascript" src="templates/oia/scripts/styleswitcher.js"></script>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<!--
+<div id="navigation">
+<h1><a href="index.php" title="Return to current image"><SITE_TITLE></a></h1>
+<span class="menu">
+<a href="index.php" title="Return to Homepage">Home</a> |
+<a href="<SITE_BROWSELINK>" title="Browse">Browse</a> |
+<a href="index.php?x=about" title="About">About</a>
+</span>
+</div>
+-->
+<!-- Header Description -->
+<div id="titlepf">
+<span class="title"><IMAGE_TITLE></span> - <IMAGE_DATETIME>
+</div>
+
+<a href="index.php?showimage=<IMAGE_PREVIOUS_ID>">
+<img src="images/<IMAGE_NAME>" alt="<IMAGE_TITLE>" title="<IMAGE_TITLE>" width="<IMAGE_WIDTH>" height="<IMAGE_HEIGHT>" id="photo" />
+</a>
+
+<div id="image-navigate">
+<span class="image-previous"><IMAGE_PREVIOUS_LINK></span>
+<span class="image-home"><a href="index.php" title="Home">Home</a></span>
+<span class="image-next"><IMAGE_NEXT_LINK></span>
+<span class="addcomment"><COMMENT_POPUP></span>
+</div>
+
+<div id="image-info">
+<!--<span class="title"><IMAGE_TITLE></span> - <IMAGE_DATETIME>-->
+<!--<span class="addcomment">+ <COMMENT_POPUP></span> -->
+<table width="100%">
+<tr>
+<td id="image-notes"><IMAGE_NOTES><p align=right><LANG_CAPTURE_DATE></p></td>
+<td id="image-exif">
+<p><EXIF_CAMERA_MODEL><br />
+<LANG_FOCAL_LENGTH><br/>
+<EXIF_EXPOSURE_TIME> <EXIF_APERTURE><br />
+<LANG_ISO><br/>
+<EXIF_FLASH><br /></p>
+</td>
+</tr>
+</table>
+</div>
+
+
+<div id="footer">
+<p>Paul Flury &#169 2006-2007 all rights reserved</p>
+<a href='http://photoblogs.org'><img src='staticImages/photoblogs.gif' alt='photoblogs' title='photoblogs' id='photoblogs' /></a>
+<a href='http://london.photobloggers.org'><img src='staticImages/londonphotoblogger.gif' alt='London Photobloggers' title='London Photobloggers' id='London Photobloggers' /></a>
+<a href='http://www.vazaar.com'><img src='staticImages/vazaar.jpg' alt='Vazaar' title='Vazaar' id='Vazaar' /></a>
+<a href='http://www.photofriday.com'><img src='staticImages/carmen.gif' alt='Photo Friday' title='Photo Friday' id='Photo Friday' /></a>
+<p>
+<a href='http://www.pixelpost.org'><img src='staticImages/pixelpost.gif' alt='RSS 2.0' title='Pixel Post' id='PixelPost' /></a>
+<!-- Site Style: <a href="#" onclick="setActiveStyleSheet('light'); return false;">Light</a> /
+<a href="#" onclick="setActiveStyleSheet('dark'); return false;">Dark</a> -->
+<SITE_RSS_LINK>
+<script type="text/javascript" src="templates/oia/scripts/counter.js"></script>
+</noscript>
+</div>
+</body>
+</html>

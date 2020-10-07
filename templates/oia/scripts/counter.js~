@@ -1,0 +1,59 @@
+var allCookies=document.cookie;
+var cookieArray=new Array();
+var cookieLabel
+var cookieValue
+var destinationAlbumName
+var destinationAlbumDir
+var destinationPage
+var posInCookie
+var startInCookie
+var endInCookie
+
+// G E T   C O O K I E
+function getCookie(cookieLabel){
+	allCookies=document.cookie;
+  	posInCookie=allCookies.indexOf(cookieLabel+"=");
+	if (posInCookie != -1) {
+		startInCookie=posInCookie+cookieLabel.length+1;
+		endInCookie=allCookies.indexOf(";",startInCookie);
+		if (endInCookie==-1) endInCookie=allCookies.length;
+		cookieArray[cookieLabel]=unescape(allCookies.substring(startInCookie,endInCookie));
+		}
+}
+
+// G O T O   A L B U M   I N D E X
+function gotoAlbumIndex(destinationAlbumName, destinationAlbumDir) {
+	putCookie("currentAlbum",destinationAlbumName);
+	window.location=destinationAlbumDir+"/index.html"
+}
+
+// G O T O   P H O T O   P A G E
+function gotoPhotoPage(destinationPage) {
+	putCookie("currentPhoto",destinationPage)
+	window.location="photo.html"
+}
+// L O A D   F O O T E R
+function loadFooter(){
+	document.write(unescape("%A9")+" Paul Flury 2003-2006</p>"); //copyright
+	getCookie("environment");
+	if (cookieArray["environment"] != "test") {
+//		document.write("<!--WEBBOT bot='Script' startspan PREVIEW='Site Meter' -->");
+//		document.write("<script type='text/javascript' language='JavaScript'>var site='s13flury2'</script>");
+//		document.write("<script type='text/javascript' language='JavaScript1.2' src='http://s13.sitemeter.com/js/counter.js?site=s13flury2'>");
+//		document.write("</script>");
+//		document.write("<noscript>");
+//		document.write("<a href='http://s13.sitemeter.com/stats.asp?site=s13flury2' target='_top'>");
+//		document.write("<img src='http://s13.sitemeter.com/meter.asp?site=s13flury2' alt='Site Meter' border=0></a>");
+//		document.write("</noscript>");
+//		document.write("<!-- Copyright (c)2002 Site Meter -->");
+//		document.write("<!--WEBBOT bot='Script' Endspan -->");
+	} else {
+		document.write("<font color='red' face='blade runner movie font, arial black' size=7>");
+		document.write("T E S T");
+	}
+}
+	
+// P U T   C O O K I E
+function putCookie(cookieLabel,cookieValue){
+	document.cookie=cookieLabel+"="+escape(cookieValue);
+}

@@ -1,0 +1,425 @@
+Pixelpost version 1.5
+-------------------------------------------------------------------------
+Version 1.5:
+Development Team:
+Ramin Mehran, Connie Mueller-Goedecke, Robert Prouse, Will Duncan, Joseph Spurling, GeoS
+Version 1.1 to Version 1.3: Linus <http://www.shapestyle.se>
+
+Contact: thecrew@pixelpost.org
+Copyright © 2006 Pixelpost.org <http://www.pixelpost.org>
+Pixelpost www:  	http://www.pixelpost.org/
+Pixelpost wiki: 	http://wiki.pixelpost.org/ 
+Pixelpost forum: 	http://forum.pixelpost.org
+
+License: http://www.gnu.org/copyleft/gpl.html
+
+-------------------------------------------------------------------------
+Changelog from Version 1.4 to Version 1.5
+============================================
+
+the big changes:
+
+
++ Admin Interface is completely language driven 
++ more options to fight SPAM 
++ Addons are now possible also in Admin-Area: new pages and customized functionality possible
++ Fixed version 1.4.x problems with PHP 5 and MySQL 5
++ Admin/index.php is split into thematic include-files (new_image.php, categories.php etc.)
+
+- Admin Area:
+  - now complete ADMIN area is language-file driven as well
+    fix program output is converted into variables
+    admin-language-files are set like this:
+    - if admin-lang-XXX.php exist, when lang-XXX.php is choosen, this admin-language-file
+      is activated
+    - if this admin-lang-XXX.php does not exist, admin-lang-english.php is activated
+    - if admin-lang-english.php does not exist, error message is printed out
+   
+   - Admin/Options/General: only one UPDATE button for all options 
+   - external links from Admin-section will open in new window
+
+   - more information in GENERAL INFO section: 
+     added info about file_uploads setting
+     added info about PP installation URL
+     added CHMOD info about image and thumb dirs
+
+   - image path is ../images/ by default 
+   - new image can be posted to EXIF-date of the image
+   - time stamps ON/OFF switch added 
+
+   - Image posting: 
+   - - added info with current time 
+   - - if EXIF  is not available post to EXIF Date will post the current time
+   - - added opening MARKDOWN links in new window
+   - - "edit link" added after uploading image for fast editing 
+   - - 12cropImage is now compatible with php5
+   - - default category is selected only when user is inside the new_image (upload new image) page
+   - - when posting to the future and you are logged in as admin, PixelPost will show you
+       the new image, non-admin users will see the actual image
+       This is added as kind of "preview" for admins
+
+
+   - images edit: 
+     - now categories can be assigned or unassigned to selected images (more than one)
+     - images can be re-uploaded
+     - preview-option (especially for posting into future)
+     - all <img> in the comments page now have alt atribute
+     - bigger input fields for image-description
+     - when image is deleted, the comments of that image will be deleted as well
+   
+
+- comments: new: comment moderation + batch operations on comments
+  - delete selected comments
+  - publish selected comments
+  - view moderation queue 
+  - add to moderation queue 
+  - Report comment as SPAM 
+  - edit the comment text 
+  - redirection to comment after entering comment automatically    
+  - changed email-handling: no email is sent, if  no comment is inserted to DB
+    error massage is visible after unsuccessful adding adding of comment
+  - added commenter URL to HTML notify
+  - now people can  delete/moderate comments with compare to the black/moderation list
+  - if no http:// or https://, the comment-url will not  be echoed
+  - only one email-adress can be entered in comment-form
+    
+- templates:
+  - new template: "simple" 
+  - all links to referer template are taken off, because Referer-List is not supported anymore
+  - a descriptive splash page (splash_page.html) will show up in case the server/photoblog is not functioning well
+
+- RSS: 
+  - corrected atom-url for autodetect
+  - RSS and ATOM Feed working / validating with apostrophes and special characters
+  - beside <ATOM_AUTODETECT>, which created the "href-part" of the autodetection-link in the
+    header-section of image_template.html, we have now 2 new AUTODETECT-Tags:  
+    for RSS + Atom, implemented in the templates which come with Pixelpost
+    (<ATOM_AUTODETECT_LINK> + <RSS_AUTODETECT_LINK>
+    just include the following in the header of your image_template.html:
+	<!-- Link for ATOM feed autodiscovery -->
+	<RSS_AUTODETECT_LINK>
+	<!-- Link for RSS feed autodiscovery -->
+	<ATOM_AUTODETECT_LINK>
+
+- Security / SPAM :
+  - no hijacking of the script possible 
+  - index.php shows 404-message when image number is not numeric or "x=ref" is called
+    no "index.php?x=foo" can be passed to a pixelpost photoblog unless "foo" is a valid argument 
+  - "Fight Spam" added to options
+    Moderation and black list for comments + referer ban list for referers
+    added spam report to admin >> comments page. 
+    People can report spams and log their IPs in both black list and referer banned list
+  - comment spam moderation and ban list is added.
+  - Fight against Referer-SPAM:
+  - Admin / General Info shows the most referers of last 7days in the Options >> Fight Spam 
+    This will make finding bad IPs easy to add them to the ban list.
+  - .htaccess code generation for preventing ref spams from hitting Pixelpost's webistes is added. 
+  - comment spam security hole is fixed. 
+    Noone can send spams with use of pixelpost comment form.	
+    only one email-adress can be entered in comment-form
+  - visitors booking can turned OFF/ON
+
+- admin_ping.php allows to ping RPC services for automatic pinging
+  the pinglist can be expanded or edited by the Admin
+
+- new tags and more:
+  <SITE_URL> will show the complete URL of the site
+  <BASE_HREF>, set in the header of a template, allows to set all links relative to the Site-URI
+ - splash page is added to the template directory 
+
+- AddOns:
+  - Admin-addons are introduced. 
+  - - You can have costumize admin section with additional addons.
+  - - Admin area can have new pages with costum functionalities.
+  - existing AddOns can be switched on/off by the admin
+  - page archive tags are listed in the addons page
+  - CopyFolder AddOn now can publish using exif capture date
+  - - upload sorted files according to their exif info or their filename.
+  - - the date of the posts is set as the actual date, if not set to use the exif date
+  - - supports clean url 
+  - - added one second sleep before each post
+  - - can set multi categories at upload
+  - - Calendar AddOn is corrected, not it supports languages like chinese or farsi where letters are double-bytes
+      so now you can use month- and weekday-names from the corresponding language file 
+      be aware to use language files which are encoded in UTF-8! 
+    
+- Development:
+  - first steps to clear URL support (next and prev datetime variables)
+  - options now have a workspace. People can write addons that adds submenu to options page!
+  - updated paths - should work with <base href=..>
+  - avoiding maximum execution time reached in thumb generation!
+  - categories_as_list now a function inside functions.php
+  - lists categories as a table, included from includes/admin_category_table_as_list.inc.php
+  - some variables re-defined
+  - login mechanism using sessions
+  - small SQL optimisation
+  - PixelPost is compatible with PHP 5.0
+
+- Installation:
+  - Install will prompt that it will create addons table
+  - no buttons / icons are packed to the release anymore 
+
+
+
+many minor changes + bugfixes :
+- fixed that double quotes in <IMAGE_NOTE_CLEAN> broke the layout in IE
+- fixed a bug that prevent deleting the comments with banned words 
+  or refs with names in the banned list
+- bugfix for comment save 
+- corrected the information about creating thumbnails
+- corrected typos 
+- admin_index.css extended and corrected 
+- added the "category-title" to all Admin-sections
+- fixed title encoding problems in image section preview at admin panel
+- fixed warnings problem in new addons "installation" function
+- corrected wrong select-value for year 2009 (posting possible from 2002 to 2009)
+- \\N to \\n
+- MJS code formated in a cool way
+- exposure time of 350d was not showing for images on images with shutter time more than 1s
+- cleared CSS and HTML in templates 
+- updated the version of markdown to Version 1.0.1c - Fri 9 Dec 2005
+- ...
+
+known bug(s):
+- re-upload of files does not accept the filename of the new file, it keeps the old file
+
+Changelog from Version 1.4.2 to Version 1.4.3
+=============================================
+
+This is a High-Priority-Update:
+- The option "Send email on comment" was vulnerable to MailSpammers
+- now all data from commentform is secured 
+
+
+Changelog from Version 1.4.1 to Version 1.4.2
+=============================================
+
+This version is mainly a security-upgrade to fight referer-spam.
+No install-script is necessary for updating
+
+major changes:
+- to prevent spam no referrer-link available from the main page anymore
+- no public referer-page supported anymore, links to your referer-list like
+	"yourdomain/folder_where_you_installed_pixelpost/index.php?x=ref" or
+ 	"yourdomain/folder_where_you_installed_pixelpost/index.php?x=referer"
+  will have no effect at all
+
+- two new Addons: 
+- /addons/anti_spam.php to maintain a "ban-list" 
+- /addons/advanced_stat.php to sumarize the visitor number (instead of referer-counts)
+   the new tag is: <ADVNCD_SITE_VISITORNUMBER>  instead of <SITE_VISITORNUMBER>
+
+minor changes:
+- a new stylesheet with styleswitcher: SIMPLE
+- EXIF-Tags corrected, so that when there is no EXIF, no <EXIF>-Tag will stay in the template
+- calendar-addon: when "No calendar" is choosen, no empty <SITE_CALENDAR> is resolved anymore
+- Login-Dialog now shows a link to the photoblog
+- when user have no cookies enabled:
+  session-ID will be always added to links by PHP with masked separator
+
+
+
+Changelog from Version 1.4 to Version 1.4.1
+============================================
+
+- corrected unmasked "&" in links in index.php to generate valid code
+- corrected dutch language-file
+- adding "rel='nofollow" to the links for referrer-template to avoid page-rank-spamming
+- corrected CSS-class for current-thumbnail in index.php
+- more information on installed GD-lib support in the admin/info-section
+- more tags documented in the tag-list pixelpost-tags.txt
+- corrected handling of " or ' in comments in admin/comment-section
+- corrected handling of " or ' in image-titles is no problem anymore
+- some more information in the readme_upgrade.txt about "_" in CSS-names
+- new tag <IMAGE_THUMBNAIL_ROW_REV>  for showing thumbnails in reversed order
+- corrected handling of image-properties in 12cropimageinc.php
+- admin menu -> options is split into 3 sub sections.
+  General/Thumbnails/Template and a new file is added to admin folder >> options.php
+- popup-commentwindow: now 'scrollbars=yes,resizable=yes' is added to the link
+- corrected behaviour of integrating thumbnails into RSS- and ATOM-feeds
+- now it is possible to post to the past, earlier than 2005, years starting from 2002
+- one more table containing the actual version
+
+
+Changelog from Version 1.3 to Version 1.4
+
+The Major Changes:
+==================
+
+- Included almost all bug fixes of v1.3 with refreshed addons.
+- Included Upgrade script for v1.3 users and information how to upgrade from
+  former versions
+- Full Unicode (UTF-8) support, no more strange characters
+- More security with better security measures.
+- Password recovery feature is now available.
+- Crop tool is added for creating selective thumbnails both when posting a new entry and
+  editing  an old entry.
+- More than one image a day is supported now
+- Multi-category support compatible with v1.3 multi-cat.
+- Cleaner RSS/ATOM feed support (also autodetect-feature in the Header-Links for RSS and ATOM)
+- Improved performance with database usage.
+- Now templates are valid CSS and valid HTML.
+- Supports more languages:
+ 	Dutch
+	English
+	French
+	German
+	Italian
+	Persian
+	Portugues
+	Spanish
+	Swedish
+- Improved usabiltiy of admin panel: more informative and user-friendly.
+- now more ways to integrate new templates:
+  all you need to do is add a new template and you can link to it without changing the code
+- PixelPost now offers better EXIF-support as it doesn't rely on PHP-EXIF-functions anymore,
+  "exifer version 1.5" is included instead of that and offers better and more extensive information
+
+Minor Changes or more information:
+==================================
+
+1- valid CSS and CSS separated from code and from template-files
+   By this it is easier to edit the layout of your templates
+
+2- UTF-RTL: This template-family is aimed for the use where reading-direction is right-to-left
+   and not left-to-right
+   We work to increase the CSS-file for these templates even more to delete all visual "bugs"
+   which still exist
+
+3- More languages supported and more content in the language-files
+
+4- Pixelpost is fully standard-compliant with RSS-Feed and ATOM-Feed,
+    as the image-templates offer AUTODETECT for that code in the header
+   (Firefox opens a small orange symbol if he detects something like that).
+   In addition, all of default templates of Pixelpost have the link to the ATOM-FEED.
+
+5 - Selective Crop of thumbnails with 12CropImage tool is added
+
+6- CSS, using Underscores which caused problem with Netscape browser, is eliminated
+
+7- Calendar addon is fixed
+
+8- Multi category indexing of photos ist now availabe by default.
+   Fully compatible with multi-category feature in the modification section by Mark.
+
+9- Page-by-Page archive v0.6 is added with multi category support (v1.4 special)
+
+10- email field is added to comments.
+    Now you can have the email of the person who commented you photo
+    This email is visible only in the admin panel
+
+11- Layout of admin panel is substantially improved.
+    Thumbs now appear in some larger window in admin>> images list.
+    Thumbs are shown in comments along with url and email of the person
+    who commented the photo and link to the image.
+
+12- CSS of admin/index.php is now out of the main file.
+    Now it is easier to change the layout of admin panel
+
+13- Now users can select between HTML and plain text notification emails on comments.
+    HTML notification email provides the thumbnail of the commented image.
+
+14- Now you can post photos based on the local timezone of your time, not the server's time.
+    By default the timezone of yours is set to the timezone of the server in the
+    installation process.
+    You can overwrite timezone offset simply in the in admin panel / options.
+
+15- all language files are updated.
+    Two new language variables for singular and plural 'category' are added
+    New language files are added (see the list above)
+    Please check whether these files are complete (some still contain some english
+    text). The language-files are prepared for better language-support, concerning
+    months-names and weekdates-names
+
+16- If no exif-information exists at all, no "$lang_flash_not_fired" - information
+    will be printed
+
+17- Pixelpost is tested with windows NT servers and no major problem up to now.
+
+18- Now you can upload images at the same minute with no confusion in thumbs.
+
+19- uploaded images get a timestamp-prefix now, so no danger of overwriting existing
+    photos with the same file-name
+
+20- Now user can post an entry in three different ways:
+     - post immediately
+     - post to a specific date
+    -  post to the next of the last post.
+
+21- Some serious security issues with v1.3 is resolved in v1.4 and this version is more secure.
+
+22- DB access is improved by setting index columns and keys.
+
+23- The admin panel is now more informative and user-friendly.
+
+24- Full upgrade script integrated in the install.php for v1.3 users.
+
+25- more flexibibility for templates:
+    If a template designer includes header.html or footer.html,
+    those files will be put at the beginning and end of every template.
+    This makes designing sites with common headers, navigation and footers easy.
+    Everything will work fine even if you don't have or want to use the headers/footers.
+
+26- Better flexibility to add existing pages to your Photoblog:
+    It is not necessary anymore to hack index.php to integrate these pages, about-pages
+    for example.
+    So now, all you need to do is add a new template and you can link to it without changing
+    the code.
+    For example, add about_template.html and it will be loaded by index.php?x=about.
+    Add info_template.html and you can link to it by index.php?x=info.
+    This way, different templates can provide different templates and everything should work.
+    Of course, certain tags are still only set based on the standard template you are viewing.
+
+28- Password recovery. Now when you forgot your password for Pixelpost there is no need
+    to panic. Just submit the email address you have set in the admin panel and you'll
+    receive a new password.
+
+29 - SITE-TITLE and EXIF-information is available now in the comment-popup
+
+30 - comment-popup will work better in browsers (when PopUp-windows are allowed)
+
+31 - extended possibilities by integrating a new standard-folder: includes
+     the pixelpost-configuration file is now located here as well as the
+     markdown- and the exifer-files
+
+32 - PixelPost now comes with the GNU General Public License.
+
+33 - PixelPost comes now with a collection of "powered by.." graphic files,
+     located in the /includes/folder
+
+34 - the templates now contain the exact width- and height- information as there
+     are new tags for this. So the templates can be designed more flexible
+
+35 - Corrected all bugs in Beta-Version and two tags are added: <IMAGE_NOTES_CLEAN>
+	<IMAGE_THUMBNAIL_NO_LINK> <IMAGE_CATEGORY_PAGED> <SITE_BROWSELINK_PAGED>
+
+36 - GNU licence document added to /doc/-directory as "license.txt".
+
+37 - added the nice pixelpost.png-s to the /include directory.
+
+38 - Paged archive addon now validates.
+
+39 - Copy folder now assigns the first category for every image it adds.
+
+40 - When deleting a comment it does double check if it is an accidental click or not!
+
+41 - Now Pixelpost warns when templates are missing and it do similar things for missing
+     language files .
+
+42 - Category link tags now have customizable format. Added two new columns for start
+     and ending chateres and with a drop box in the admin panel and a custom formating
+     edit box there.
+
+43 - Now the first category by 'id' value is checked by default.
+
+44 - Now user cannot delete the first category (default: id=1).
+     Thus, this category can be renamed only.
+
+45 - RSS / ATOM is valid even when users use HTML tags in the image note.
+
+46 - now in the default templates, when user click the add comment hyperlink the page
+     moves down to the commenting section. very clean.
+
+47 - The EXIF infromation of exposure is now more readable and clean.
+
+48 - index.php now calls admin/admin_index.css, not necessary to have a CSS in the main folder.
