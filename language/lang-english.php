@@ -114,12 +114,12 @@ $lang_message_banned_comment     = "Your comment hasn't been saved! It contains 
 // Email Notification
 
 $lang_email_notification_subject = "New Comment";
-$lang_email_notification_pt1 = "Hello,<br>A new comment has been made at your photoblog.<br><br>";	  
-$lang_email_notification_pt2 = "<br>The comment is: <br> ----------------------------------------------------------------------<br>";	  
+$lang_email_notification_pt1 = "New blog comment.<br><br>";	  
+$lang_email_notification_pt2 = "<br>It is: <br> ----------------------------------------------------------------------<br>";	  
 $lang_email_notification_pt3 = "by";  
 $lang_email_notification_pt4 = "----------------------------------------------------------------------<br>\n\nEmail sent by Pixelpost<br>";
-$lang_email_notificationplain_pt1 = "Hello,\n\A new comment has been made at your photoblog.";	  
-$lang_email_notificationplain_pt2 = "\n\nThe comment is:\n\n----------------------------------------------------------------------";	  
+$lang_email_notificationplain_pt1 = "\A New blog comment.";	  
+$lang_email_notificationplain_pt2 = "\n\nIt is:\n\n----------------------------------------------------------------------";	  
 $lang_email_notificationplain_pt3 = "by";
 $lang_email_notificationplain_pt4 = "\n\n----------------------------------------------------------------------\n\nEmail sent by Pixelpost";
 
